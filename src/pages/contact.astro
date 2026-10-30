@@ -12,8 +12,7 @@ const contactEndpoint = import.meta.env.DEV
 
 const mobileImage = await getImage({
   src: HeroPicMobile,
-  widths: [400, 640, 800, 1024],
-  sizes: '100vw',
+  widths: [350, 450, 500, 640, 800, 1024],
   format: 'webp',
 });
 ---
@@ -23,16 +22,16 @@ const mobileImage = await getImage({
     <div class="relative hero-container">
       <picture>
         <source
-          media="(max-width: 600px)"
+          media="(max-width: 700px)"
           srcset={mobileImage.srcSet.attribute}
-          sizes="100vw"
+          sizes="70vw"
           type="image/webp"
         />
 
         <Image
           src={HeroPic}
           alt="Elie"
-          widths={[350, 480, 640, 960, 1200, 1600, 2400]}
+          widths={[800, 1024, 1200, 1600, 2400]}
           sizes="100vw"
           class="hero-image"
         />
@@ -44,8 +43,7 @@ const mobileImage = await getImage({
 
       <!-- Text overlay -->
       <div
-        class="absolute left-2 top-1/4 z-10
-             -translate-y-1/4
+        class="absolute left-2 top-1/8 z-10
              md:left-[8%]
              md:top-1/3
              max-w-lg"
@@ -53,7 +51,7 @@ const mobileImage = await getImage({
         <h1
           class="text-reveal font-serif
              text-deeper-teal
-               text-xl leading-[0.95]
+               text-2xl leading-[0.95]
                sm:text-2xl
                md:text-3xl
                lg:text-5xl"
@@ -359,50 +357,25 @@ const mobileImage = await getImage({
 </script>
 
 <style>
-  @media (min-width: 380px) {
-    /* mobile — viewport 440px */
+  @media (min-width: 350px) {
     .hero-image {
-      width: 80%;
+      width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 50%;
+      object-position: 55% 50%;
       position: absolute;
       right: 0;
       top: 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 55%);
     }
+
     .hero-container {
       position: relative;
       overflow: hidden;
-      height: 500px;
-    }
-    .hero-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        #f9fafb 0%,
-        rgb(243 244 246 / 55%) 37%,
-        transparent 56%
-      );
-    }
-    /* Image-edge fade follows the image's left boundary. */
-    .hero-edge-gradient {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: calc(20% + 30px);
-      width: 156px;
-      transform: translateX(-50%);
-      pointer-events: none;
-      background: linear-gradient(
-        to right,
-        #f9fafb 0%,
-        rgb(243 244 246 / 91%) 68%,
-        transparent 100%
-      );
-      display: block;
+      height: clamp(600px, 40vw, 750px);
     }
   }
+
   @media (min-width: 1150px) {
     .hero-image {
       width: 85%;
@@ -416,14 +389,14 @@ const mobileImage = await getImage({
     .hero-container {
       position: relative;
       overflow: hidden;
-      height: 720px;
+      height: 920px;
     }
     .hero-gradient {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to right,
-        #f3f4f6 0%,
+        #f9fafb 0%,
         rgb(243 244 246 / 90%) 28%,
         transparent 47%
       );
@@ -439,7 +412,7 @@ const mobileImage = await getImage({
       pointer-events: none;
       background: linear-gradient(
         to right,
-        #f3f4f6 0%,
+        #f9fafb 0%,
         rgb(243 244 246 / 90%) 50%,
         transparent 100%
       );
