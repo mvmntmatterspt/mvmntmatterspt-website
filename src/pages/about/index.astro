@@ -25,7 +25,7 @@ const optimizedBackground = await getImage({
 });
 ---
 
-<BaseLayout hasWave={false} title="Meet Your PT">
+<BaseLayout hasWave={false} title="About">
   <section class="relative overflow-hidden">
     <div
       class="relative h-110
@@ -165,10 +165,9 @@ const optimizedBackground = await getImage({
   <section class="bg-sky-alt-bg reveal-fade">
     <div
       class="mx-auto grid grid-cols-1
-         md:min-h-130 md:grid-cols-2
+         md:min-h-130 md:grid-cols-[45%_55%]
          lg:max-w-none lg:w-full
-         lg:h-[650px]
-         xl:h-[1000px]
+ 
          xl:grid-cols-[55%_45%]"
     >
       <!-- Image -->
@@ -176,11 +175,11 @@ const optimizedBackground = await getImage({
         <Image
           src={StoryImage}
           alt="Elie outdoors"
-          widths={[640, 960]}
+          widths={[640, 800, 960]}
           sizes="(max-width: 900px) 100vw, 50vw"
           class="h-auto w-full
       md:h-full md:object-cover
-      md:object-[90%_50%]"
+      md:object-[10%_50%]"
         />
       </div>
 
@@ -400,7 +399,7 @@ const optimizedBackground = await getImage({
         <Image
           src={OutsidePTPic}
           alt="Elie outdoors"
-          widths={[640, 960, 1200, 1600]}
+          widths={[640, 800, 960, 1200, 1600]}
           sizes="(max-width: 767px) 100vw, 50vw"
           class="h-auto w-full
                md:h-full md:object-cover"

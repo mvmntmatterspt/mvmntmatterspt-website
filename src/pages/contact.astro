@@ -1,18 +1,21 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import HeroPic from '@assets/images/services/hero.jpg';
-import HeroPicMobile from '@assets/images/services/hero-mobile.jpg';
+import HeroPicMobile2 from '@assets/images/contact-page/hero-mobile-14.jpg';
 import { Mail, Phone } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import aboveFooterMobileImg from '@assets/images/contact-page/above-footer-15.jpg';
+import aboveFooterImg from '@assets/images/contact-page/above-footer-16.jpg';
+
 const contactEmail = 'elie@mvmntmatterspt.com';
 const contactPhone = '303-555-1234';
 const contactEndpoint = import.meta.env.DEV
   ? '/.netlify/functions/test'
   : 'https://pt-project.netlify.app/.netlify/functions/test';
 
-const mobileImage = await getImage({
-  src: HeroPicMobile,
-  widths: [350, 450, 500, 640, 800, 1024],
+const aboveFooterMobileImage = await getImage({
+  src: aboveFooterMobileImg,
+  widths: [280, 400, 640, 800],
+  sizes: '100vw',
   format: 'webp',
 });
 ---
@@ -20,59 +23,37 @@ const mobileImage = await getImage({
 <BaseLayout hasWave={false} title="let's connect">
   <section class="relative overflow-hidden bg-gray-50">
     <div class="relative hero-container">
-      <picture>
-        <source
-          media="(max-width: 700px)"
-          srcset={mobileImage.srcSet.attribute}
-          sizes="70vw"
-          type="image/webp"
-        />
-
-        <Image
-          src={HeroPic}
-          alt="Elie"
-          widths={[800, 1024, 1200, 1600, 2400]}
-          sizes="100vw"
-          class="hero-image"
-        />
-      </picture>
-
-      <div class="hero-edge-gradient"></div>
-
-      <div class="hero-gradient"></div>
+      <Image
+        src={HeroPicMobile2}
+        alt="Elie"
+        widths={[300, 450, 650, 800, 1024, 1200, 1600, 2400]}
+        sizes="100vw"
+        class="hero-image"
+      />
 
       <!-- Text overlay -->
       <div
-        class="absolute left-2 top-1/8 z-10
+        class="absolute left-1 top-1/8 z-10
              md:left-[8%]
-             md:top-1/3
+             md:top-1/6
+             lg:left-4
              max-w-lg"
       >
         <h1
           class="text-reveal font-serif
              text-deeper-teal
                text-2xl leading-[0.95]
-               sm:text-2xl
-               md:text-3xl
+               sm:text-4xl
+               md:text-4xl
                lg:text-5xl"
         >
           Let's Connect
         </h1>
-
-        <!-- <div class="text-reveal-late">
-          <div class="mt-5 h-px w-12 bg-deeper-teal"></div>
-          <p
-            class="mt-6 md:mt-12 w-40 lg:w-3/4 text-stone-950 text-xs md:text-lg leading-6 md:leading-8"
-          >
-            One-on-one physical therapy that comes to you—so you can get better
-            without putting your life on hold.
-          </p>
-        </div> -->
       </div>
     </div>
   </section>
   <section
-    class="text-reveal relative overflow-hidden md:px-4 lg:pt-16 sm:pb-16 sm:px-0 lg:px-8"
+    class="text-reveal relative overflow-hidden md:px-4 lg:pt-16 bg-gray-100 md:pb-16 sm:px-0 lg:px-8"
   >
     <div
       class="mx-auto grid w-full max-w-7xl overflow-hidden lg:rounded-2xl
@@ -80,17 +61,18 @@ const mobileImage = await getImage({
     >
       <!-- Left panel -->
       <div
-        class="relative flex flex-col justify-center bg-sand-bg px-8 py-12 text-neutral-content sm:px-12 lg:px-16 lg:py-20"
+        class="relative flex flex-col justify-center sm:items-center bg-sand-bg px-8 py-12 text-neutral-content sm:px-12 lg:px-16 lg:py-20"
       >
         <div class="relative max-w-lg">
           <p
-            class="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-deeper-teal"
+            class="mb-3 text-sm text-center font-semibold uppercase tracking-[0.25em] text-deeper-teal"
           >
             Contact Dr. Elie
           </p>
 
           <h2
-            class="max-w-md text-stone-950 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
+            class="max-w-md text-center text-stone-950 text-4xl
+             font-semibold leading-tight sm:text-5xl lg:text-6xl"
           >
             Let's Connect
           </h2>
@@ -299,6 +281,26 @@ const mobileImage = await getImage({
       </div>
     </div>
   </section>
+
+  <section class="fade relative overflow-hidden">
+    <div class="relative above-footer-container">
+      <picture>
+        <source
+          media="(max-width: 600px)"
+          srcset={aboveFooterMobileImage.srcSet.attribute}
+          sizes="100vw"
+          type="image/webp"
+        />
+        <Image
+          src={aboveFooterImg}
+          alt="Elie"
+          widths={[640, 960, 1200, 1600, 2400]}
+          sizes="100vw"
+          class="above-footer-image"
+        />
+      </picture>
+    </div>
+  </section>
 </BaseLayout>
 
 <script>
@@ -362,23 +364,74 @@ const mobileImage = await getImage({
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 55% 50%;
+      object-position: 31% 50%;
       position: absolute;
       right: 0;
       top: 0;
-      mask-image: linear-gradient(to right, transparent 0%, black 55%);
+      mask-image: linear-gradient(to right, transparent 0%, black 42%);
     }
 
     .hero-container {
       position: relative;
       overflow: hidden;
-      height: clamp(600px, 40vw, 750px);
+      height: clamp(360px, 40vw, 650px);
+    }
+  }
+  @media (min-width: 700px) {
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 15% 50%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 55%);
+    }
+    .hero-container {
+      position: relative;
+      overflow: hidden;
+      height: clamp(550px, 80vw, 750px);
     }
   }
 
-  @media (min-width: 1150px) {
+  @media (min-width: 1280px) {
     .hero-image {
       width: 85%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 10% 50%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 43%);
+    }
+    .hero-container {
+      position: relative;
+      overflow: hidden;
+      height: clamp(800px, 60vw, 1000px);
+    }
+  }
+
+  @media (min-width: 300px) {
+    .above-footer-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 20%;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .above-footer-container {
+      overflow: hidden;
+      height: clamp(600px, 100vw, 950px);
+    }
+  }
+
+  @media (min-width: 700px) {
+    .above-footer-image {
+      width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: 50% 50%;
@@ -386,37 +439,26 @@ const mobileImage = await getImage({
       right: 0;
       top: 0;
     }
-    .hero-container {
+    .above-footer-container {
       position: relative;
       overflow: hidden;
-      height: 920px;
+      height: clamp(570px, 60vw, 800px);
     }
-    .hero-gradient {
+  }
+  @media (min-width: 1100px) {
+    .above-footer-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
       position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        #f9fafb 0%,
-        rgb(243 244 246 / 90%) 28%,
-        transparent 47%
-      );
-    }
-    /* Image-edge fade follows the image's left boundary. */
-    .hero-edge-gradient {
-      position: absolute;
+      right: 0;
       top: 0;
-      bottom: 0;
-      left: calc(15% + 90px);
-      width: 312px;
-      transform: translateX(-50%);
-      pointer-events: none;
-      background: linear-gradient(
-        to right,
-        #f9fafb 0%,
-        rgb(243 244 246 / 90%) 50%,
-        transparent 100%
-      );
-      display: block;
+    }
+    .above-footer-container {
+      position: relative;
+      overflow: hidden;
+      height: clamp(800px, 50vw, 1000px);
     }
   }
 </style>

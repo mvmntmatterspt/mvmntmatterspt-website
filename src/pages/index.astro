@@ -1,10 +1,7 @@
 ---
-import AutoCarousel from '../components/Carousel';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getImage, Image } from 'astro:assets';
-import LogoStacked from '@assets/images/mvnmt-logo-stacked-black.svg';
-import LogoStackedColor from '@assets/images/mvmnt-logo-stacked-color.svg';
-import SectionHeading from '../components/SectionHeading.astro';
+
 import { getCollection } from 'astro:content';
 import type { Testimonial } from '../components/TestimonialCarousel';
 import TestimonialCarousel from '../components/TestimonialCarousel';
@@ -32,16 +29,16 @@ const servicesWeTreat = [
   'Persistent Pain',
 ];
 
-import neckPain from '@assets/images/we-treat/neck-pain.jpg';
-import golfSwing from '@assets/images/we-treat/golf-swing.jpg';
-import tyingShoes from '@assets/images/we-treat/tying-shoes.jpg';
-import strength from '@assets/images/we-treat/strength.jpg';
+import liftingImage from '@assets/images/we-treat/lifting.jpg';
+import runnersImage from '@assets/images/we-treat/running.jpg';
+import tennisImage from '@assets/images/we-treat/tennis.jpg';
+import golfImage from '@assets/images/we-treat/golf.jpg';
 
 const images = [
-  { src: neckPain, alt: 'Neck pain treatment' },
-  { src: golfSwing, alt: 'Golf rehabilitation' },
-  { src: tyingShoes, alt: 'running' },
-  { src: strength, alt: 'strength and conditioning' },
+  { src: tennisImage, alt: 'tennis' },
+  { src: liftingImage, alt: 'We help you with strength training' },
+  { src: golfImage, alt: 'Golf rehabilitation' },
+  { src: runnersImage, alt: 'running' },
 ];
 
 import {
@@ -85,26 +82,6 @@ const features = [
     icon: DollarSign,
   },
 ];
-const unsplashUrls = [
-  {
-    url: 'https://plus.unsplash.com/premium_photo-1664300093125-92bc8a26d3fa?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    focalY: 0.75,
-    ar: '16:9',
-    isTall: false,
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1608561807980-6e39958ae1c8?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    focalY: 0.65,
-    ar: '4:3',
-    isTall: true,
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1628609108761-7d1dbec20e4a?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    focalY: 0.45,
-    ar: '4:3',
-    isTall: true,
-  },
-];
 
 // Map over your URLs and run them through Astro's image optimization engine
 // const optimizedImages = await Promise.all(
@@ -138,7 +115,7 @@ const bgSizesAttribute = `
 `;
 ---
 
-<BaseLayout title="start here" hasWave={false}>
+<BaseLayout title="Home" hasWave={false}>
   <main
     class="relative w-full min-h-screen flex flex-col"
     id="theme-preview"
@@ -249,7 +226,7 @@ const bgSizesAttribute = `
                text-xs font-extrabold uppercase tracking-widest
                text-stone-950"
           >
-            Meet your PT
+            About
             <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -369,7 +346,7 @@ const bgSizesAttribute = `
                   alt={image.alt}
                   widths={[400, 600, 800]}
                   sizes="(max-width: 1024px) 40vw, 500px"
-                  class="size-full object-cover"
+                  class="size-full  object-cover"
                 />
               </div>
             ))
@@ -439,28 +416,17 @@ const bgSizesAttribute = `
         class="mx-auto grid w-full md:max-w-7xl grid-cols-1 gap-6
            md:grid-cols-2 place-items-center text-center md:gap-12 md:px-10 p-18"
       >
-        <!-- Image -->
-        <div class="w-full max-w-sm lg:max-w-lg">
-          <Image
-            src={elieHeadshot}
-            alt="Elie Sabins"
-            widths={[400, 600, 800, 1000]}
-            sizes="(max-width: 1024px) 384px, 448px"
-            class="block w-5/6 object-cover
-           object-[50%_50%] rounded-2xl"
-          />
-        </div>
         <div
-          class="w-full max-w-xs md:max-w-sm lg:max-w-lg
-         aspect-square rounded-full overflow-hidden
+          class="w-full max-w-sm md:max-w-md
+         aspect-6/7 rounded-full overflow-hidden
          shadow-xl"
         >
           <Image
             src={elieHeadshot}
             alt="Elie Sabins"
             widths={[400, 600, 800, 1000]}
-            sizes="(max-width: 768px) 320px, 448px"
-            class="block w-full h-full object-cover object-[90%_15%]"
+            sizes="(max-width: 868px) 420px, 548px"
+            class="block w-full h-full object-cover object-[05%_15%]"
           />
         </div>
 
