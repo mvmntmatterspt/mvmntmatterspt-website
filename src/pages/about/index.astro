@@ -1,13 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Image, getImage } from 'astro:assets';
-import SpecialtiesStock from '@assets/images/certifications/specialties.jpg';
 import HeroPic from '@assets/images/about-image/hero-4.jpg';
-import OutsidePTPic from '@assets/images/about-image/outside-pt.jpg';
-import Background from '@assets/images/about-image/background.jpg';
-import Foreground from '@assets/images/about-image/foreground.png';
+import FamilyPic from '@assets/images/about-image/family.jpg';
 import StoryImage from '@assets/images/about-image/story-11.jpg';
-import SectionHeading from '../../components/SectionHeading.astro';
 import { certifications } from '../../data/certifications';
 
 interface Props {
@@ -165,7 +161,7 @@ const optimizedBackground = await getImage({
   <section class="bg-sky-alt-bg reveal-fade">
     <div
       class="mx-auto grid grid-cols-1
-         md:min-h-130 md:grid-cols-[45%_55%]
+         md:min-h-130 md:grid-cols-[48%_52%]
          lg:max-w-none lg:w-full
  
          xl:grid-cols-[55%_45%]"
@@ -179,7 +175,7 @@ const optimizedBackground = await getImage({
           sizes="(max-width: 900px) 100vw, 50vw"
           class="h-auto w-full
       md:h-full md:object-cover
-      md:object-[10%_50%]"
+      md:object-[02%_50%]"
         />
       </div>
 
@@ -207,7 +203,8 @@ const optimizedBackground = await getImage({
             text-sm leading-7
             text-slate-700
             md:text-base
-            md:leading-8"
+            md:leading-8
+            lg:text-xl lg:leading-10"
           >
             <p>
               I’m a Doctor of Physical Therapy with a passion for helping people
@@ -354,30 +351,30 @@ const optimizedBackground = await getImage({
   <section class="bg-sky-alt-bg">
     <div
       class="mx-auto grid grid-cols-1
-           md:min-h-130 md:grid-cols-2
-           lg:h-112.5 lg:w-full lg:max-w-none
-           xl:h-130"
+           md:min-h-150 md:grid-cols-2
+           lg:h-175 lg:w-full lg:max-w-none
+           xl:h-270 2xl:grid-cols-[60%_40%]"
     >
       <div
-        class="order-1 flex items-center
-             px-6 py-10
+        class="order-1 flex min-h-92 items-center
+             px-6 py-8
              md:px-10 md:py-12
              lg:px-14 lg:py-12
              xl:px-16 xl:py-14"
       >
         <div class="mx-auto max-w-xl">
           <p
-            class="text-xs font-semibold uppercase
+            class="text-sm font-semibold uppercase
                  tracking-[0.14em] text-stone-950
-                 md:text-lg"
+                 md:text-lg lg:text-xl 2xl:text-2xl"
           >
             Outside of PT
           </p>
 
           <div
             class="mt-6 space-y-6
-                  text-sm leading-7 text-stone-750
-                 md:text-base md:leading-8"
+                   leading-7 text-stone-750
+                 md:text-base md:leading-8 lg:text-xl lg:leading-10"
           >
             <p>
               I'm a lifelong lover of movement and the outdoors. You'll find me
@@ -395,14 +392,14 @@ const optimizedBackground = await getImage({
         </div>
       </div>
 
-      <div class="order-2 h-full overflow-hidden">
+      <div class="order-2 relative min-h-0 overflow-hidden">
         <Image
-          src={OutsidePTPic}
+          src={FamilyPic}
           alt="Elie outdoors"
-          widths={[640, 800, 960, 1200, 1600]}
+          widths={[460, 640, 800, 960, 1200, 1600]}
           sizes="(max-width: 767px) 100vw, 50vw"
           class="h-auto w-full
-               md:h-full md:object-cover"
+               md:h-full md:object-cover -scale-2.0"
         />
       </div>
     </div>
