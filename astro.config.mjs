@@ -20,8 +20,8 @@ export default defineConfig({
     ? undefined
     : isNetlify
       ? "https://pt-project.netlify.app"
-      : "https://mvmntmatterspt.github.io/",
-  base: isDev ? undefined : isNetlify ? undefined : "/mvmntmatterspt-website/",
+      : "http://mvmntmatterspt.com",
+  base: isDev ? undefined : isNetlify ? undefined : "/",
   adapter: isNetlify ? netlify() : undefined,
 
   vite: {
