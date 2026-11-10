@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found" hasWave={false}>
+  <section
+    class="min-h-[55vh] flex flex-col
+         items-center justify-center
+         bg-gray-50 px-6 text-center"
+  >
+    <h1 class="text-6xl font-bold text-deeper-teal">404 Error</h1>
+
+    <h2 class="mt-4 text-3xl font-serif">Page Not Found</h2>
+
+    <p class="mt-4 text-stone-600">
+      The page you're looking for doesn't exist.
+    </p>
+
+    <a href="/" class="btn mt-8"> Back to Home </a>
+  </section>
+</BaseLayout>
