@@ -77,7 +77,6 @@ export default async (request: Request) => {
     }
     const validatedData = result.data;
 
-    // Honeypot
     if (validatedData.contact_check) {
       return jsonResponse({ success: true }, 200, headers);
     }
