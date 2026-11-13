@@ -9,8 +9,8 @@ export default config({
     ? {
         kind: "github",
         repo: {
-          owner: "neilmccracken-dev",
-          name: "astro-pt",
+          owner: "mvmntmatterspt",
+          name: "mvmntmatterspt-website",
         },
       }
     : {
