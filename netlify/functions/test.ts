@@ -3,8 +3,6 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const allowedOrigins = [
-  "https://fastzeeba.com",
-  "https://www.fastzeeba.com",
   "http://mvmntmatterspt.com",
   "https://mvmntmatterspt.com",
 ];
