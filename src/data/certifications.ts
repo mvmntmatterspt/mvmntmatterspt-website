@@ -27,12 +27,12 @@ export const certifications: Certification[] = [
       "The highest certification level for orthopedic physical therapy",
   },
   {
-    short: "TPI 3",
+    short: "TPI 2",
     slug: "tpi",
-    name: "Titleist Performance Institute Medical Level 3",
+    name: "Titleist Performance Institute Medical Level 2",
     icon: Flag,
     description:
-      "The highest level of training from the Titleist Performance Institute",
+      "Advanced Golf-Specific Medical & Injury Assessment Training from the Titleist Performance Institute",
   },
   {
     short: "TPS",
