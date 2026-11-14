@@ -2,10 +2,7 @@ import { z } from "zod";
 import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const allowedOrigins = [
-  "http://mvmntmatterspt.com",
-  "https://mvmntmatterspt.com",
-];
+const allowedOrigins = ["https://mvmntmatterspt.com"];
 
 function corsHeaders(origin: string | null) {
   const allowedOrigin = origin && allowedOrigins.includes(origin) ? origin : "";
@@ -79,7 +76,7 @@ export default async (request: Request) => {
 
     const { data: emailData, error } = await resend.emails.send({
       from: "MVMNT Matters Website <website@mvmntmatterspt.com>",
-      to: "elie@@mvmntmatterspt.com",
+      to: "elie@mvmntmatterspt.com",
       replyTo: validatedData.email,
       subject: `New website contact: ${validatedData.subject}`,
       html: `
