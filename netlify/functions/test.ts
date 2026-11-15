@@ -37,7 +37,7 @@ const ContactSchema = z.object({
       (value) => !value.includes("\r") && !value.includes("\n"),
       "Invalid subject",
     ),
-  message: z.string().trim().min(1).max(5000),
+  message: z.string().trim().min(1).max(500),
   contact_check: z.string().optional(),
 });
 
@@ -110,6 +110,56 @@ export default async (request: Request) => {
         500,
         headers,
       );
+    }
+
+    // 2. Send acknowledgment to visitor
+    try {
+      const { error: confirmationError } = await resend.emails.send({
+        from: "MVMNT Matters <website@mvmntmatterspt.com>",
+        to: validatedData.email,
+        subject: "We've received your message | MVMNT Matters",
+        html: `
+    <div style="
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px;
+      background-color: #ffffff;
+    ">
+
+      <img
+        src="https://mvmntmatterspt.com/images/email-logo.jpg"
+        alt="MVMNT Matters Physical Therapy"
+        width="180"
+        style="
+          display: block;
+          width: 180px;
+          height: auto;
+          margin-bottom: 32px;
+        "
+      />
+
+      <h2 style="color: #115e59;">
+        Thank you for reaching out!
+      </h2>
+
+      <p style="line-height: 1.7; color: #292524;">
+        We've received your message and will be in touch soon.
+      </p>
+
+      <p style="margin-top: 32px; color: #292524;">
+        MVMNT Matters Physical Therapy
+      </p>
+
+    </div>
+  `,
+      });
+
+      if (confirmationError) {
+        console.error("Confirmation email failed:", confirmationError);
+      }
+    } catch (confirmationError) {
+      console.error("Unexpected confirmation email error:", confirmationError);
     }
 
     return jsonResponse(
