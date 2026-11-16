@@ -7,6 +7,8 @@ import netlify from "@astrojs/netlify";
 import markdoc from "@astrojs/markdoc";
 import keystatic from "@keystatic/astro";
 
+import sitemap from "@astrojs/sitemap";
+
 const isNetlify = process.env.NETLIFY === "true";
 const isDev = process.env.NODE_ENV === "development";
 console.log(isDev);
@@ -32,5 +34,5 @@ export default defineConfig({
     domains: ["images.unsplash.com", "plus.unsplash.com"],
   },
 
-  integrations: [react(), markdoc(), ...(useKeystatic ? [keystatic()] : [])],
+  integrations: [react(), markdoc(), ...(useKeystatic ? [keystatic()] : []), sitemap()],
 });
