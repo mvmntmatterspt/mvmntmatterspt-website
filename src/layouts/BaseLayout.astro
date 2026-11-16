@@ -6,12 +6,16 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
+  description?: string;
   isHome?: boolean; // Optional flag for the homepage
   hasWave?: boolean;
 }
-const { title, hasWave, isHome } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, hasWave, isHome, description } = Astro.props;
 const BRAND_NAME = 'MVMNT Matters';
-const fullTitle = isHome ? BRAND_NAME : `${title} | ${BRAND_NAME}`;
+const fullTitle = isHome
+  ? `Mobile Physical Therapy in South Denver | ${BRAND_NAME}`
+  : `${title} | ${BRAND_NAME}`;
 ---
 
 <html lang="en" data-theme="winter">
@@ -27,6 +31,12 @@ const fullTitle = isHome ? BRAND_NAME : `${title} | ${BRAND_NAME}`;
       href={`${import.meta.env.BASE_URL}favicon.svg`}
     />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <link rel="canonical" href={canonicalURL.href} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

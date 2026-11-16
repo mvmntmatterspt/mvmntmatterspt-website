@@ -12,7 +12,11 @@ interface Props {
 const { index = 1 } = Astro.props;
 ---
 
-<BaseLayout hasWave={false} title="About">
+<BaseLayout
+  hasWave={false}
+  description="Meet Dr. Elie Sabins, the physical therapist behind MVMNT Matters. Learn about her approach to personalized, one-on-one mobile physical therapy"
+  title="About"
+>
   <section class="relative overflow-hidden">
     <div
       class="relative h-110

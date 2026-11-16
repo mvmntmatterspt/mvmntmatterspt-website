@@ -82,40 +82,14 @@ const features = [
     icon: DollarSign,
   },
 ];
-
-// Map over your URLs and run them through Astro's image optimization engine
-// const optimizedImages = await Promise.all(
-//   unsplashUrls.map(async (item) => {
-//     const modifiedUrl = `${item.url}?fit=crop&crop=focalpoint&ar=${item.ar}&fp-x=0.5&fp-y=${item.focalY}`;
-
-//     const optimized = await getImage({
-//       src: modifiedUrl,
-//       inferSize: true,
-//       widths: [240, 540, 720, 1024],
-//       // Unsplash specific formatting parameter shortcut
-//       format: 'webp',
-//     });
-//     return {
-//       ...optimized,
-//       isTall: item.isTall,
-//     };
-//   }),
-// );
-const sizesAttribute = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1024px) 720px, 1024px`;
-const optimizedBg = await getImage({
-  src: 'https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?q=80&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  inferSize: true,
-  widths: [360, 480, 640, 768, 1024, 1440, 1920],
-  format: 'webp',
-});
-const bgSizesAttribute = `
-  (max-width: 640px) 100vw,
-  (max-width: 1024px) 100vw,
-  100vw
-`;
 ---
 
-<BaseLayout title="Home" hasWave={false}>
+<BaseLayout
+  isHome={true}
+  title="Home"
+  hasWave={false}
+  description="Personalized mobile physical therapy delivered to you in Highlands Ranch, Littleton, Parker, and surrounding South Denver communities."
+>
   <main
     class="relative w-full min-h-screen flex flex-col"
     id="theme-preview"
@@ -760,114 +734,3 @@ const bgSizesAttribute = `
     }
   }
 </style>
-
-<script>
-  const preview = document.querySelector<HTMLElement>('#theme-preview');
-
-  document
-    .querySelectorAll<HTMLButtonElement>('[data-theme-button]')
-    .forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!preview) return;
-        preview.dataset.theme = button.dataset.themeButton;
-      });
-    });
-
-  // function setupMissionObserver() {
-  //   const section = document.getElementById('mission-section');
-
-  //   if (!section) {
-  //     console.log('no section');
-  //     return;
-  //   }
-
-  //   const animatedElements = section.querySelectorAll(
-  //     '.reveal-left, .reveal-right',
-  //   );
-
-  //   if (!animatedElements.length) return;
-
-  //   const desktop = window.matchMedia('(min-width: 768px)');
-
-  //   // Mobile: ensure everything is visible.
-  //   if (!desktop.matches) {
-  //     animatedElements.forEach((element) => {
-  //       element.classList.add('in-view');
-  //     });
-
-  //     return;
-  //   }
-
-  //   // Reset the elements when returning to this page.
-  //   animatedElements.forEach((element) => {
-  //     element.classList.remove('in-view');
-  //   });
-
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (!entry?.isIntersecting) return;
-
-  //       animatedElements.forEach((element) => {
-  //         element.classList.add('in-view');
-  //       });
-
-  //       observer.disconnect();
-  //     },
-  //     {
-  //       threshold: 0.25,
-  //     },
-  //   );
-
-  //   observer.observe(section);
-  // }
-
-  // document.addEventListener('astro:page-load', setupMissionObserver);
-</script>
-
-<!-- <Image
-      src={unsplashUrl}
-      inferSize={true}
-      widths={[240, 540, 720, 1024]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1024px) 720px, 1024px`}
-      alt="A beautiful dynamically resized scenery from Unsplash"
-      class="w-full h-full object-cover"
-    />
-    <div
-      class="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-white backdrop-blur-sm"
-    >
-      <h3 class="text-lg font-semibold">Your Image Title Here</h3>
-      <p class="text-sm text-slate-200">
-        Optional subtitle or caption text goes right here.
-      </p>
-    </div> -->
-
-<!-- <div
-    class="absolute left-0 top-0 w-full -translate-y-[90%]
-           overflow-hidden leading-0"
-  >
-    <svg
-      preserveAspectRatio="none"
-      class="block h-24 w-full fill-[#F9F5F6] md:h-52"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-    >
-      <path
-        d="M0,192L60,170.7C120,149,240,107,360,101.3C480,96,600,128,720,165.3C840,203,960,245,1080,240C1200,235,1320,181,1380,154.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-      />
-    </svg>
-  </div> -->
-
-<!-- <div
-          class="absolute bottom-0 left-0 w-full overflow-hidden leading-0 translate-y-[99%] -scale-x-100 -scale-y-100 transform"
-        >
-          <svg
-            preserveAspectRatio="none"
-            class="relative block w-full h-24 md:h-52 fill-[#F9F5F6]"
-            xmlns="http://w3.org"
-            viewBox="0 0 1440 320"
-          >
-            <path
-              d="M0,192L60,170.7C120,149,240,107,360,101.3C480,96,600,128,720,165.3C840,203,960,245,1080,240C1200,235,1320,181,1380,154.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-            ></path>
-          </svg>
-        </div> -->

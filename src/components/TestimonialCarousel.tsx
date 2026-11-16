@@ -32,7 +32,6 @@ export default function TestimonialCarousel({
   }, [currentIndex, testimonials.length]);
 
   const handlePrev = (): void => {
-    console.log(currentIndex);
     setCurrentIndex((prev) =>
       prev === 0 ? testimonials.length - 1 : prev - 1,
     );

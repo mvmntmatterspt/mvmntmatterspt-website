@@ -11,18 +11,16 @@ import sitemap from "@astrojs/sitemap";
 
 const isNetlify = process.env.NETLIFY === "true";
 const isDev = process.env.NODE_ENV === "development";
-console.log(isDev);
-console.log("NETLIFY:", process.env.NETLIFY);
-console.log("Using GitHub storage:", isNetlify);
+
 const useKeystatic = isDev || isNetlify;
 export default defineConfig({
   // output: 'static',
   output: isNetlify ? "server" : "static",
   site: isDev
-    ? undefined
+    ? "https://mvmntmatterspt.com"
     : isNetlify
       ? "https://pt-project.netlify.app"
-      : "http://mvmntmatterspt.com",
+      : "https://mvmntmatterspt.com",
   base: isDev ? undefined : isNetlify ? undefined : "/",
   adapter: isNetlify ? netlify() : undefined,
 
@@ -34,5 +32,10 @@ export default defineConfig({
     domains: ["images.unsplash.com", "plus.unsplash.com"],
   },
 
-  integrations: [react(), markdoc(), ...(useKeystatic ? [keystatic()] : []), sitemap()],
+  integrations: [
+    react(),
+    markdoc(),
+    ...(useKeystatic ? [keystatic()] : []),
+    sitemap(),
+  ],
 });
