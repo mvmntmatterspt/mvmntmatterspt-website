@@ -18,7 +18,7 @@ export default defineConfig({
   output: isNetlify ? "server" : "static",
   site: "https://mvmntmatterspt.com",
   base: "/",
-  adapter: isNetlify ? netlify() : undefined,
+  adapter: isNetlify ? netlify({ middlewareMode: "edge" }) : undefined,
 
   vite: {
     plugins: [tailwindcss()],
