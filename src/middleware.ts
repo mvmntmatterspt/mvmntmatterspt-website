@@ -20,14 +20,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (!isKeystatic && !isNetlifyFunction && !isKeystaticAPI) {
     const destination = new URL(pathname + context.url.search, productionURL);
+    const response = Response.redirect(destination, 302);
 
-    return Response.redirect(destination, 302);
+    response.headers.set("X-Debug-Middleware", "redirect");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+
+    return response;
   }
 
   // Continue processing allowed routes
   const response = await next();
 
   response.headers.set("X-Robots-Tag", "noindex, nofollow");
-
+  response.headers.set("X-Debug-Middleware", "executed");
   return response;
 });

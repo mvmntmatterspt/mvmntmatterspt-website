@@ -16,12 +16,8 @@ const useKeystatic = isDev || isNetlify;
 export default defineConfig({
   // output: 'static',
   output: isNetlify ? "server" : "static",
-  site: isDev
-    ? "https://mvmntmatterspt.com"
-    : isNetlify
-      ? "https://pt-project.netlify.app"
-      : "https://mvmntmatterspt.com",
-  base: isDev ? undefined : isNetlify ? undefined : "/",
+  site: "https://mvmntmatterspt.com",
+  base: "/",
   adapter: isNetlify ? netlify() : undefined,
 
   vite: {
