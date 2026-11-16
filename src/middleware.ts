@@ -5,7 +5,7 @@ const productionURL = "https://mvmntmatterspt.com";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
   // Only run this logic on Netlify
-  if (process.env.NETLIFY !== "true") {
+  if (context.url.hostname !== "superb-dango-747faa.netlify.app") {
     return next();
   }
 

@@ -14,7 +14,6 @@ const isDev = process.env.NODE_ENV === "development";
 
 const useKeystatic = isDev || isNetlify;
 export default defineConfig({
-  // output: 'static',
   output: isNetlify ? "server" : "static",
   site: "https://mvmntmatterspt.com",
   base: "/",
