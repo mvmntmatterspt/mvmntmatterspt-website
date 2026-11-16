@@ -1,37 +1,61 @@
 import { defineMiddleware } from "astro:middleware";
 
 const productionURL = "https://mvmntmatterspt.com";
+const netlifyHostname = "superb-dango-747faa.netlify.app";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const { pathname } = context.url;
-  // Only run this logic on Netlify
-  if (context.url.hostname !== "superb-dango-747faa.netlify.app") {
+  const { pathname, hostname, search } = context.url;
+
+  // Only apply this middleware logic to the deployed Netlify domain.
+  // Local development and GitHub Pages remain unaffected.
+  if (hostname !== netlifyHostname) {
     return next();
   }
 
-  // Routes that must remain accessible on Netlify
+  // Routes that must remain accessible on Netlify.
   const isKeystatic =
     pathname === "/keystatic" || pathname.startsWith("/keystatic/");
-
-  const isNetlifyFunction = pathname.startsWith("/.netlify/functions/");
 
   const isKeystaticAPI =
     pathname === "/api/keystatic" || pathname.startsWith("/api/keystatic/");
 
-  if (!isKeystatic && !isNetlifyFunction && !isKeystaticAPI) {
-    const destination = new URL(pathname + context.url.search, productionURL);
-    const response = Response.redirect(destination, 302);
+  const isNetlifyFunction = pathname.startsWith("/.netlify/functions/");
 
-    response.headers.set("X-Debug-Middleware", "redirect");
-    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  // Static assets needed by the Keystatic admin interface.
+  const isStaticAsset =
+    pathname.startsWith("/_astro/") ||
+    pathname === "/_image" ||
+    pathname.startsWith("/_image/") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/robots.txt";
 
-    return response;
+  // Redirect public pages to the official GitHub Pages domain.
+  if (!isKeystatic && !isKeystaticAPI && !isNetlifyFunction && !isStaticAsset) {
+    const destination = new URL(pathname + search, productionURL);
+
+    // Construct the redirect with headers already defined.
+    // Response.redirect() creates immutable headers in this runtime.
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: destination.toString(),
+        "X-Robots-Tag": "noindex, nofollow",
+        "X-Debug-Middleware": "redirect",
+      },
+    });
   }
 
-  // Continue processing allowed routes
+  // Allow Keystatic, its API, functions, and static assets to proceed.
   const response = await next();
 
-  response.headers.set("X-Robots-Tag", "noindex, nofollow");
-  response.headers.set("X-Debug-Middleware", "executed");
-  return response;
+  // Clone the headers because the original response may be immutable.
+  const headers = new Headers(response.headers);
+  headers.set("X-Robots-Tag", "noindex, nofollow");
+  headers.set("X-Debug-Middleware", "executed");
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 });

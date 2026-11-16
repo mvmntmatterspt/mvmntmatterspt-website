@@ -2,7 +2,6 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
-import { loadEnv } from "vite";
 import netlify from "@astrojs/netlify";
 import markdoc from "@astrojs/markdoc";
 import keystatic from "@keystatic/astro";
